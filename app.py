@@ -7,7 +7,7 @@ import plotly.io as pio
 
 pio.renderers.default = "plotly_mimetype+notebook_connected"   
 
-df = pd.read_csv(r"D:\ITI\Data Explore\data\titanic.csv")
+df = pd.read_csv(r"data\titanic.csv")
 df.columns = df.columns.str.lower()
 df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
 df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
