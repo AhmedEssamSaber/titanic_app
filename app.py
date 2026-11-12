@@ -5,21 +5,13 @@ import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 
+from utills.data import load_data
+from utills.config import ORDERS, COLORS
+
+
+df = load_data()
+st.set_page_config(layout="wide")
 pio.renderers.default = "plotly_mimetype+notebook_connected"   
-
-df = pd.read_csv("data/titanic.csv")
-df.columns = df.columns.str.lower()
-df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
-df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
-df["port"] = df["embarked"].map({"C": "Cherbourg", "Q": "Queenstown", "S": "Southampton"})
-df["family_size"] = df["sibsp"] + df["parch"] + 1
-df["title"] = df["name"].str.extract(r",\s*([^\.]+)\.", expand=False)
-df["age_group"] = pd.cut(df["age"], [0, 12, 18, 35, 60, 80],
-                         labels=["child", "teen", "young adult", "adult", "senior"])
-
-ORDERS = {"class": ["First", "Second", "Third"], "survival": ["Died", "Survived"],
-          "age_group": ["child", "teen", "young adult", "adult", "senior"]}
-COLORS = {"Died": "#D95D4A", "Survived": "#0F766E"}
 
 
 st.title("Titanic app")
