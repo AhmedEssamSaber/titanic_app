@@ -26,6 +26,16 @@ gender = st.radio("Select gender", ["male", "female"], horizontal=True)
 
 data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
 
+c1_1, c2_1, c3_1, c4_1 = st.columns(4)
+with c1_1:
+    st.metric("Total passengers", len(data))
+with c2_1:
+    st.metric("Survived Rate", f"{len(data[data['survival'] == 'Survived']) / len(data) * 100:.1f}%")
+with c3_1:
+    st.metric("Median Age", round(data["age"].median(), 1))
+with c4_1:
+    st.metric("Median Fare", round(data["fare"].median(), 1))
+
 
 c1, c2 = st.columns(2)
 
