@@ -7,7 +7,7 @@ import plotly.io as pio
 
 from utills.data import load_data
 from utills.config import ORDERS, COLORS
-from utills.figures import plot_family_size, plot_outcome
+from utills.figures import plot_family_size, plot_outcome, plot_heatmap
 
 df = load_data()
 st.set_page_config(layout="wide")
@@ -41,10 +41,19 @@ with c4_1:
     st.metric("Median Fare", round(data["fare"].median(), 1))
 
 
-c1, c2 = st.columns(2)
+tab1, tab2 = st.tabs(["Family size vs survival","Heatmap"])
+with tab1:
+    
+    c1, c2 = st.columns(2)
 
-with c1:
-    st.plotly_chart(plot_family_size(data), use_container_width=True)
+    with c1:
+        st.plotly_chart(plot_family_size(data), use_container_width=True)
 
-with c2:
-    st.plotly_chart(plot_outcome(data), use_container_width=True)
+    with c2:
+        st.plotly_chart(plot_outcome(data), use_container_width=True)
+
+with tab2:
+    c1, c2 = st.columns(2)
+
+    with c1:
+        st.plotly_chart(plot_heatmap(data), use_container_width=True)
