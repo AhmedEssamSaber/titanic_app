@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 
-pio.renderers.default = "plotly_mimetype+notebook_connected"   # plotly.js is loaded from the internet: the saved notebook stays small
+pio.renderers.default = "plotly_mimetype+notebook_connected"   
 
 df = pd.read_csv(r"D:\ITI\Data Explore\data\titanic.csv")
 df.columns = df.columns.str.lower()
