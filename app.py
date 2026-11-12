@@ -7,7 +7,7 @@ import plotly.io as pio
 
 from utills.data import load_data
 from utills.config import ORDERS, COLORS
-
+from utills.figures import plot_family_size, plot_outcome
 
 df = load_data()
 st.set_page_config(layout="wide")
@@ -30,14 +30,9 @@ data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
 c1, c2 = st.columns(2)
 
 with c1:
-    fig = px.histogram(data, x="family_size", nbins=11, labels={"family_size": "Family size (incl. the passenger)"},
-                   title="How big were the families on board?")
-    fig.update_layout(bargap=0.1, yaxis_title="Passengers")
+    fig = plot_family_size(data)
     st.plotly_chart(fig, use_container_width=True)
 
 with c2:
-    outcome = data["survival"].value_counts().reset_index()
-
-    fig = px.pie(outcome, names="survival", values="count", hole=0.5, color="survival",
-                color_discrete_map=COLORS, title="Died vs survived")
+    fig = plot_outcome(data)
     st.plotly_chart(fig, use_container_width=True)
