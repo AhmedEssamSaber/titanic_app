@@ -21,20 +21,14 @@ show_data = st.checkbox("Show data")
 if show_data:
     st.dataframe(df.head(10), hide_index=True)
 
-c1_1, c2_1, c3_1, c4_1 = st.columns(4)
-with c1_1:
-    st.metric("Total passengers", len(df))
-with c2_1:
-    st.metric("Survived Rate", f"{len(df[df['survival'] == 'Survived']) / len(df) * 100:.1f}%")
-with c3_1:
-    st.metric("Median Age", round(df["age"].median(), 1))
-with c4_1:
-    st.metric("Median Fare", round(df["fare"].median(), 1))
 
 classes = st.multiselect("Select classes", df["class"].unique(), default=df["class"].unique())
-gender = st.radio("Select gender", ["male", "female"], horizontal=True)
+gender = st.radio("Select gender", ["male", "female", "All"], horizontal=True)
 
-data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
+if gender == "All":
+    data = df[df["class"].isin(classes)]
+else:
+    data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
 
 c1_1, c2_1, c3_1, c4_1 = st.columns(4)
 with c1_1:
