@@ -53,7 +53,4 @@ with tab1:
         st.plotly_chart(plot_outcome(data), use_container_width=True)
 
 with tab2:
-    c1, c2 = st.columns(2)
-
-    with c1:
-        st.plotly_chart(plot_heatmap(data), use_container_width=True)
+    st.plotly_chart(plot_heatmap(data), use_container_width=True)
