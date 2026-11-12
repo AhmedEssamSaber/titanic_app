@@ -30,9 +30,7 @@ data = df[(df["class"].isin(classes)) & (df["sex"] == gender)]
 c1, c2 = st.columns(2)
 
 with c1:
-    fig = plot_family_size(data)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(plot_family_size(data), use_container_width=True)
 
 with c2:
-    fig = plot_outcome(data)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(plot_outcome(data), use_container_width=True)
